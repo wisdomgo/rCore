@@ -1,8 +1,9 @@
 use crate::sbi::shutdown;
 use core::panic::PanicInfo;
 use crate::println;
+
 #[panic_handler]
-fn panic(info:&PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
     if let Some(location) = info.location() {
         println!(
             "Panicked at {}:{} {}",
@@ -11,7 +12,7 @@ fn panic(info:&PanicInfo) -> ! {
             info.message().unwrap()
         );
     } else {
-        println!("Panicked: {}",info.message().unwrap());
+        println!("Panicked: {}", info.message().unwrap());
     }
     shutdown(true)
 }
